@@ -1,9 +1,11 @@
 'use strict'
+require('dotenv').config()
 const Hapi = require('hapi')
 const mongo = require('mongodb').MongoClient
 
 // Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
-const uri = require('./config.js').uri
+//const uri = require('./config.js').uri
+const uri = process.env.URI
 
 const server = new Hapi.Server()
 server.connection({
