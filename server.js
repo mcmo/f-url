@@ -82,7 +82,7 @@ function processUrl(url, host, cb){
     urls.findOne({ original_url: url }, function(err, result){
       if (err) throw err
       if (result){
-        return cb({original_url: result.original_url, short_url: host + '/' + result.short_url})
+        return cb({original_url: result.original_url, short_url: 'https://' + host + '/' + result.short_url})
       }
       // find max short_url
       urls.find().sort({_id:-1}).limit(1).toArray(function(err, result){
@@ -94,7 +94,7 @@ function processUrl(url, host, cb){
         }, function(err, result){
           if (err) throw err
           let ops = result.ops[0]
-          cb({original_url: ops.original_url, short_url: host + '/' + ops.short_url})
+          cb({original_url: ops.original_url, short_url: 'https://' + host + '/' + ops.short_url})
         })
       })
     })
