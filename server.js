@@ -11,30 +11,43 @@ server.connection({
   port: process.env.PORT || 8080
 })
 
-server.route({
-  method: 'GET',
-  path: '/new/{url*}',
-  handler: function(request, reply){
-    let url = request.params.url
+server.register(require('inert'), (err) => {
+  
+  if (err) throw err
 
-    if (!validUrl(url)) return reply({
-      original_url: url,
-      error: 'incorrect url format'
-    })
-    
-    let host = request.headers.host
-    processUrl(url, host, reply)
-  }
-})
-
-server.route({
-  method: 'GET',
-  path: '/{num}',
-  handler: function(request, reply){
-    let short = request.params.num
-    let host = request.headers.host
-    processShort(short, host, reply)
-  }
+  server.route({
+    method: 'GET',
+    path: '/new/{url*}',
+    handler: function(request, reply){
+      let url = request.params.url
+  
+      if (!validUrl(url)) return reply({
+        original_url: url,
+        error: 'incorrect url format'
+      })
+      
+      let host = request.headers.host
+      processUrl(url, host, reply)
+    }
+  })
+  
+  server.route({
+    method: 'GET',
+    path: '/{num}',
+    handler: function(request, reply){
+      let short = request.params.num
+      let host = request.headers.host
+      processShort(short, host, reply)
+    }
+  })
+  
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: function(request, reply){
+      reply.file('./index.html')
+    }
+  })
 })
 
 server.start(() => console.log('Started'))
@@ -55,7 +68,7 @@ function processShort(short, host, reply){
 
 function validUrl(url) {
   // regex url formula: http://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149
-  let re = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
+  let re = /^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
   return re.test(url)
 }
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width">
+  <title>FCC:URL Shortener Microservice</title>
+  <style>
+    body {
+      font-size: 18px;
+      padding: 0 15px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    code {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>FCC: URL Shortener Microservice</h1>
+
+  <h3>This is a <a href="http://www.freecodecamp.com/mcmo" target="_blank">FreeCodeCamp.com</a> project which uses full-stack JavaScript to accomplish the following objectives.</h2>
+  <ul>
+    <li>I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.</li>
+    <li>If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.</li>
+    <li>When I visit that shortened URL, it will redirect me to my original link.</li>
+  </ul>
+
+  <h3>Example original URL usage:</h3>
+  <div><code>https://f-url.herokuapp.com/new/https://www.google.com</code></div>
+  <div><code>https://f-url.herokuapp.com/new/http://freecodecamp.com/news</code></div>
+  
+  <h3>Example original URL output:</h3>
+  <div><code>{ "original_url": "http://freecodecamp.com/news", "short_url": "https://f-url.herokuapp.com/4" }</code></div>
+  
+  <h3>Example short URL usage:</h3>
+  <div><code>https://f-url.herokuapp.com/4</code></div>
+  
+  <h3>Will redirect to:</h3>
+  <div><code>http://freecodecamp.com/news</code></div>
+
+</body>
+
+</html>
