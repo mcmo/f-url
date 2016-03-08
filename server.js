@@ -33,18 +33,21 @@ server.route({
   handler: function(request, reply){
     let short = request.params.num
     let host = request.headers.host
-    processNum(short, host, reply)
+    processShort(short, host, reply)
   }
 })
 
 server.start(() => console.log('Started'))
 
-function processNum(short, host, reply){
+function processShort(short, host, reply){
   mongo.connect(uri, function(err, db){
     if (err) throw err
     var urls = db.collection('urls')
     urls.findOne({ short_url: +short }, function(err, result){
       if (err) throw err
+      if (!result){
+        return reply({error: "No short url found for given input"})
+      }
       reply.redirect(result.original_url)
     })
   })
