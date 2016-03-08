@@ -4,7 +4,6 @@ const mongo = require('mongodb').MongoClient
 
 // Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
 const uri = require('./config.js').uri
-console.log(uri)
 
 const server = new Hapi.Server()
 server.connection({
