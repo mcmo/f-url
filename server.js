@@ -3,7 +3,8 @@ const Hapi = require('hapi')
 const mongo = require('mongodb').MongoClient
 
 // Standard URI format: mongodb://[dbuser:dbpassword@]host:port/dbname
-const uri = 'mongodb://furluser:furlpw@ds023458.mlab.com:23458/f-url';
+const uri = require('./config.js').uri
+console.log(uri)
 
 const server = new Hapi.Server()
 server.connection({
